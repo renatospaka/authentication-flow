@@ -1,0 +1,48 @@
+version: "3.5"
+
+services:
+  app:
+    build: .
+    # entrypoint: dockerize -wait tcp://db:5432 -timeout 40s ./.docker/entrypoint.sh
+    entrypoint: ./.docker/entrypoint.sh
+    container_name: auth-api
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/home/node/app
+    # depends_on:
+    #   - db
+
+  # db:
+  #   build: .docker/postgres
+  #   hostname: postgres
+  #   container_name: auth-api_db
+  #   tty: true
+  #   restart: unless-stopped
+  #   volumes:
+  #     - .docker/postgres/data:/var/lib/postgresql/data
+  #   environment:
+  #     - POSTGRES_PASSWORD=Postgres2020!
+  #     - POSTGRES_DB=online_store
+  #   ports:
+  #     - "5432:5432"
+  #   extra_hosts:
+  #     - "host.docker.internal:172.17.0.1"
+
+  # pgadmin:
+  #   image: dpage/pgadmin4:5.4
+  #   hostname: pgadmin
+  #   container_name: auth-api_pgadmin
+  #   tty: true
+  #   restart: unless-stopped
+  #   volumes:
+  #     - .docker/postgres/pgadmin:/var/lib/pgadmin
+  #   environment:
+  #     - PGADMIN_DEFAULT_EMAIL=renatospaka@gmail.com
+  #     - PGADMIN_DEFAULT_PASSWORD=PgAdmin2020!
+  #   ports:
+  #     - "9001:80"
+  #   depends_on:
+  #     - db
+  #   extra_hosts:
+  #     - "host.docker.internal:172.17.0.1"
