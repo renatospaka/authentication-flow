@@ -1,4 +1,5 @@
-FROM node:14.15.4-alpine3.12
+FROM node:14.17.6-alpine3.14
+# FROM node:14.15.4-alpine3.12
 
 RUN apk add --no-cache bash \
     && apk add tzdata \
@@ -9,7 +10,9 @@ RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSI
     && tar -C /usr/local/bin -xzvf dockerize-alpine-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
     && rm dockerize-alpine-linux-amd64-$DOCKERIZE_VERSION.tar.gz
 
-RUN npm install -g @nestjs/cli@8.0.0
+WORKDIR /home/node/app
+COPY . .
+
+RUN npm install -g @nestjs/cli@8.1.1
 
 USER node
-WORKDIR /home/node/app
