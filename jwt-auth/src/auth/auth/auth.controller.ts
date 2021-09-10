@@ -14,7 +14,7 @@ export class AuthController {
   }
 
   @Role("Admin")
-  @UseGuards(JwtGuard)
+  @UseGuards(JwtGuard, RoleGuard)
   @Get("/teste")
   test(@Req() req) {
     console.log(req.user);
