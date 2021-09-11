@@ -33,4 +33,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+#
+.docker/develop.md
 README.md
+
+#
+../jwt-auth/*.**
