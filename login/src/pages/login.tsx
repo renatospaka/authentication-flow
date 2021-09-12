@@ -1,4 +1,6 @@
+import { FormEvent } from "react";
 import styles from "../styles/LoginPage.module.css";
+import { http } from "../utils/http";
 
 const LoginPage = () => {
   async function onSubmit(event: FormEvent) {
@@ -6,8 +8,10 @@ const LoginPage = () => {
 
     const username = (document.querySelector("#username") as HTMLInputElement).value;
     const password = (document.querySelector("#password") as HTMLInputElement).value;
+    // console.log(username, password)
 
-    // const { data } = await http.post("login", { username, password });
+    const { data } = await http.post("login", { username, password });
+    console.log(data.token)
   }
 
   return (
